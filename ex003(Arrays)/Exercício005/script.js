@@ -21,26 +21,44 @@ function inLista(n, l){
 
 function adicionar(){
     if(isNumero(num.value) && !inLista(num.value, valores)){
-        let item = document.createElement('option')
-        item.value = `lista${num.value}`
+        let item = document.createElement('option')     
         item.text = `Valor ${num.value} adicionado`
         lista.appendChild(item)
-        valores.push(num.value)
+        res.innerHTML = ''
+        valores.push(Number(num.value))
     }else{
         alert("Valor Inválido ou já encontrado na lista")
     }
+
+num.value =''
+num.focus()
 }
-2
+
 function finalizar(){
-    valores.sort()
-    alert(`é sla, isso aqui funcionou ${valores}`)
-   /* valores.sort()
-   for(c = 0; c <= valores.length; c++){
-        soma += valores[c]
+    if(valores.length == 0){
+        alert('Adicione valores antes de finalizar')
+    } else {
+        let tot = valores.length
+        let maior = valores[0]
+        let menor = valores[0]
+        let soma = 0
+        let media = 0
+
+        for(let pos in valores){
+            soma += valores[pos]
+            if(valores[pos] > maior)
+                maior = valores[pos]
+            if(valores[pos] < menor)
+                menor = valores[pos]
+        }
+        media = soma / tot 
+        res.innerHTML = ''
+        res.innerHTML += `<p>Ao todo, foram cadastrados ${tot} números </p>`
+        res.innerHTML += `<p>O menor número formado foi ${menor}</p>`
+        res.innerHTML += `<p>O maior número informado foi ${maior} </p>`
+        res.innerHTML += `<p>Somando todos os valores temos ${soma}</p>`
+        res.innerHTML += `<p>A média dos valores digitados é: ${media}</p>`
+        
     }
-    res.innerHTML = `Ao todo, temos ${valores.length} números cadastrados`
-    res.innerHTML += `O maior valor informado foi ${valores[valores.length - 1]}`
-    res.innerHTML += `O menor valor informado foi ${valores[0]}`
-    res.innerHTML += `Somando todos os valores temos: ${soma}`
-    res.innerHTML += `A média dos valores digitados é: ${soma / valores.length}`*/
+    
 }
